@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ItemList extends ArrayList<GroceryItem> {
@@ -74,7 +75,7 @@ public class ItemList extends ArrayList<GroceryItem> {
        Map<Double, Integer> temp = new HashMap<>();
        for (int i = 0; i < this.size(); i++)
        {
-           if (this.get(i).name.equals(name))
+           if (this.get(i).name.equalsIgnoreCase(name))
            {
                if (!temp.containsKey(this.get(i).price))
                {
@@ -90,12 +91,50 @@ public class ItemList extends ArrayList<GroceryItem> {
        return temp;
    }
 
-   public ArrayList createList()
+   public String ExportList(Map<String,Map<Double,Integer>> FinalList)
    {
+       StringBuilder sb = new StringBuilder();
+       for(Map.Entry<String,Map<Double,Integer>> entry: FinalList.entrySet())
+       {
+         sb.setLength(0);
+           Map<Double, Integer> innerMap = entry.getValue();
+           String Word = entry.getKey();
+         sb.append(String.format("Name:%10s\t\tseen: %d times"+"\n",Word,this.countEntrySet(innerMap)));
+         sb.append("===============\t\t=============");
+         System.out.println(sb.toString());
+         //  for(innerMap:)
 
-     ArrayList items = this.countGroceryWords();
 
 
+
+       }
+
+    return sb.toString();
+   }
+
+
+   public int countEntrySet(Map<Double,Integer> f) {
+       int count = 0;
+       for (Map.Entry value : f.entrySet())
+       {
+           count += (Integer) value.getValue();
+
+       }
+    return count;
+   }
+
+   public Map<String,Map<Double,Integer>> createList()
+   {
+     Map<String,Map<Double,Integer>> FinalList = new LinkedHashMap<>();
+     ArrayList<String> items = this.countGroceryWords();
+     for(int i =0;i<items.size();i++)
+     {
+
+      Map f =  this.getPrices(items.get(i));
+      FinalList.put(items.get(i),f);
+
+     }
+    return FinalList;
    }
 
 

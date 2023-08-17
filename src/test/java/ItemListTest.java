@@ -60,6 +60,24 @@ public class ItemListTest {
         Assert.assertEquals(2,actual);
     }
 
+    @Test
+    public void testCreateList()
+    {
+            ItemList list = new ItemList();
+            list.add(new GroceryItem("Milk",9.99,"Food","9/10/21"));
+            list.add(new GroceryItem("Milk",9.99,"Food","9/10/21"));
+            list.add(new GroceryItem("Milk",8.99,"Food","9/10/21"));
+
+
+
+            list.add(new GroceryItem("Pizza",9.99,"Food","9/10/21"));
+            list.add(new GroceryItem("Garlic",10.99,"Food","9/10/21"));
+            list.add(new GroceryItem("Broccoli",10.99,"Food","9/11/21"));
+            Map F = list.createList();
+            list.ExportList(F);
+
+    }
+
 
 
 
