@@ -13,5 +13,5 @@ public class Main {
     Parser.format();
     ItemList itemList = new ItemList();
     itemList.ListBuilder();
-    System.out.println(itemList.toString());
+    itemList.ExportList(itemList.createList());
 }}

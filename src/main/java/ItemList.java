@@ -100,9 +100,20 @@ public class ItemList extends ArrayList<GroceryItem> {
            Map<Double, Integer> innerMap = entry.getValue();
            String Word = entry.getKey();
          sb.append(String.format("Name:%10s\t\tseen: %d times"+"\n",Word,this.countEntrySet(innerMap)));
-         sb.append("===============\t\t=============");
+         sb.append("===============\t\t============="+"\n");
+         int mapsize = innerMap.size();
+         int count = 0;
+         for(Map.Entry<Double,Integer> entry2: innerMap.entrySet())
+         {
+
+             sb.append(String.format("Price:%9.2f\t\tseen: %d times"+"\n",entry2.getKey(),entry2.getValue()));
+             if(count<mapsize) {
+                 sb.append("---------------\t\t-------------\n");
+             }
+             count++;
+
+         }
          System.out.println(sb.toString());
-         //  for(innerMap:)
 
 
 
