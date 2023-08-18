@@ -13,5 +13,6 @@ public class Main {
     Parser.format();
     ItemList itemList = new ItemList();
     itemList.ListBuilder();
-    itemList.ExportList(itemList.createList());
+    int i =itemList.ListCorretcor();
+    itemList.ExportList(itemList.createList(),i);
 }}

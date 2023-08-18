@@ -1,5 +1,7 @@
 import org.apache.commons.io.IOUtils;
 
+import javax.print.DocFlavor;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Parser {
@@ -28,6 +30,31 @@ public class Parser {
         }
     }
 
+    public static ArrayList<String[]> normalize(ArrayList<String[]> Array)
+    {
+        ArrayList<String[]> ret = new ArrayList<>();
+        for(int i= 0; i<Array.size();i++)
+        {
+             ret.add(Array.get(i));
+        }
+        for(int i= 0; i<ret.size();i++)
+        {
+            if ( ret.get(i).length>1 && ret.get(i)[1].contains("0") && ret.get(i)[1].contains("o"))
+            {
+                String apply ="";
+               for(int j =0;j<ret.get(i)[1].length();j++)
+               {
+                   if(ret.get(i)[1].charAt(j)=='0')
+                   {
+                       apply+="o";
+                   }
+                   else apply+=ret.get(i)[1].charAt(j);
+               }
+            ret.get(i)[1] = apply;
+            }
+        }
+        return ret;
+    }
 
 
 
@@ -39,6 +66,7 @@ public class Parser {
         for(String item: outputArray)
         {
             biggerArray.add(item.split("[^A-Za-z0-9./:]"));
+
         }
         for(String[] item: biggerArray)
         {
@@ -47,6 +75,7 @@ public class Parser {
                 EvenBiggerArray.add(item2.split("[:]"));
             }
         }
+        EvenBiggerArray=normalize(EvenBiggerArray);
         Parser.EvenBiggerArray = EvenBiggerArray;
     }
 
